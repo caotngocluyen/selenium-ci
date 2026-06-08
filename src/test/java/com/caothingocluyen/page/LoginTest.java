@@ -49,6 +49,22 @@ driver = new ChromeDriver(options);
         );
     }
 
+    @Test
+public void testInvalidLogin() {
+
+    loginPage.enterCredentials(
+            "wrong_user",
+            "wrong_password"
+    );
+
+    loginPage.clickLogin();
+
+    Assert.assertTrue(
+            loginPage.isErrorMessageDisplayed(),
+            "Error message is not displayed!"
+    );
+}
+
     @AfterMethod
     public void tearDown() {
 

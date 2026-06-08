@@ -18,6 +18,14 @@ public class LoginPage {
     @FindBy(id = "login-button")
     WebElement loginButton;
 
+    @FindBy(css = "[data-test='error']")
+    WebElement errorMessage;
+    
+    public boolean isErrorMessageDisplayed() {
+
+    return errorMessage.isDisplayed();
+}
+
     public LoginPage(WebDriver driver) {
 
         this.driver = driver;
