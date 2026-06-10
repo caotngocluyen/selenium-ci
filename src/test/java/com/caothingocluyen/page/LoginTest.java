@@ -10,7 +10,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
 public class LoginTest {
 
     WebDriver driver;
@@ -23,11 +22,11 @@ public class LoginTest {
 
         ChromeOptions options = new ChromeOptions();
 
-options.addArguments("--headless");
-options.addArguments("--no-sandbox");
-options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
 
-driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
 
         driver.get("https://www.saucedemo.com/");
 
@@ -35,7 +34,7 @@ driver = new ChromeDriver(options);
     }
 
     @Test
-    public void testSuccessfulLogin() {
+    public void testSuccessfulLogin1() {
 
         loginPage.enterCredentials(
                 "standard_user",
@@ -50,20 +49,20 @@ driver = new ChromeDriver(options);
     }
 
     @Test
-public void testInvalidLogin() {
+    public void testSuccessfulLogin2() {
 
-    loginPage.enterCredentials(
-            "wrong_user",
-            "wrong_password"
-    );
+        loginPage.enterCredentials(
+                "wrong_user",
+                "wrong_password"
+        );
 
-    loginPage.clickLogin();
+        loginPage.clickLogin();
 
-    Assert.assertTrue(
-            loginPage.isErrorMessageDisplayed(),
-            "Error message is not displayed!"
-    );
-}
+        // SẼ FAIL
+        Assert.assertTrue(
+                loginPage.isLoginSuccessful()
+        );
+    }
 
     @AfterMethod
     public void tearDown() {
